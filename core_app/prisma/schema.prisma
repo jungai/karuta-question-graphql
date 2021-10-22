@@ -14,14 +14,14 @@ model Question {
   id        Int      @id @default(autoincrement())
   question  String   @db.VarChar(255)
   createdAt DateTime @default(now())
-  Answer    Answer[]
+  answer    Answer[]
 }
 
 model Character {
   id        Int      @id @default(autoincrement())
   name      String   @unique
   createdAt DateTime @default(now())
-  Answer    Answer[]
+  answer    Answer[]
 }
 
 model Answer {

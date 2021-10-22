@@ -3,7 +3,7 @@ import cors from 'cors';
 import { ApolloServer } from 'apollo-server-express';
 import { ApolloServerPluginDrainHttpServer } from 'apollo-server-core';
 import http from 'http';
-import { schema } from './schema';
+import { schema } from './graphql';
 import { context } from './context';
 
 export function setupCor(e: Express) {
