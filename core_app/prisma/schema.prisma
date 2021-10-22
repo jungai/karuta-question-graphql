@@ -2,10 +2,34 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 datasource db {
-  provider = "postgresql"
+  provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
 generator client {
   provider = "prisma-client-js"
+}
+
+model Question {
+  id        Int      @id @default(autoincrement())
+  question  String   @db.VarChar(255)
+  createdAt DateTime @default(now())
+  Answer    Answer[]
+}
+
+model Character {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  createdAt DateTime @default(now())
+  Answer    Answer[]
+}
+
+model Answer {
+  id        Int       @id @default(autoincrement())
+  answer    String    @db.VarChar(255)
+  question  Question  @relation(fields: [qId], references: [id])
+  qId       Int
+  character Character @relation(fields: [cId], references: [id])
+  cId       Int
+  createdAt DateTime  @default(now())
 }

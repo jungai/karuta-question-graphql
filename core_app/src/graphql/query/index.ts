@@ -1,9 +1,15 @@
-import { queryType } from 'nexus';
+import { GraphQLObjectType, GraphQLList } from 'graphql';
+import { Context } from '../../context';
+import { QuestionType } from '../question';
 
-export const Query = queryType({
-    definition(t) {
-        t.string('hello', {
-            resolve: () => 'hello eiei',
-        });
+export const query = new GraphQLObjectType({
+    name: 'Query',
+    fields: {
+        question: {
+            type: new GraphQLList(QuestionType),
+            resolve: (_parent, _args, ctx: Context) => {
+                return ctx.prisma.question.findMany();
+            },
+        },
     },
 });
